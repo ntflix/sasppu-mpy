@@ -46,7 +46,7 @@ static mp_obj_t hdma_subscr(mp_obj_t self_in, mp_obj_t index_in, mp_obj_t value)
             }
             case HDMA_WRITE_OAM: {
                 sasppu_sprite_t *spr = mp_obj_malloc(sasppu_sprite_t, &sasppu_type_sprite);
-                spr->dat = entry->data.sprite;
+                spr->dat = entry->data.oam;
                 mp_obj_t tuple_args[2] = {MP_OBJ_NEW_SMALL_INT(entry->oam_index), MP_OBJ_TO_PTR(spr)};
                 return mp_obj_new_tuple(2, tuple_args);
             }
@@ -123,12 +123,11 @@ static mp_obj_t hdma_subscr(mp_obj_t self_in, mp_obj_t index_in, mp_obj_t value)
 
                     entry->command = HDMA_WRITE_OAM;
                     sasppu_sprite_t *spr = MP_OBJ_FROM_PTR(items[1]);
-                    entry->data.sprite = spr->dat;
+                    entry->data.oam = spr->dat;
                     entry->oam_index = bind_index;
                 }
             }
         }
-        SASPPU_hdma[index] = spr->dat;
         return mp_const_none;
     }
 
