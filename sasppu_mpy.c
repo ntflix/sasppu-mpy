@@ -15,6 +15,7 @@
 
 #include "sasppu_oam.h"
 #include "sasppu_map.h"
+#include "sasppu_hdma.h"
 
 #include "sasppu_mpy_help.h"
 
@@ -42,6 +43,38 @@ void sasppu_module_attr(mp_obj_t self_in, qstr attr, mp_obj_t *dest)
         case MP_QSTR_bg1:
             dest[0] = mp_obj_malloc(sasppu_map_t, &sasppu_type_map);
             ((sasppu_map_t *)MP_OBJ_TO_PTR(dest[0]))->bg = 1;
+            break;
+        case MP_QSTR_hdma_0:
+            dest[0] = mp_obj_malloc(sasppu_hdma_t, &sasppu_type_hdma);
+            ((sasppu_hdma_t *)MP_OBJ_TO_PTR(dest[0]))->table = 0;
+            break;
+        case MP_QSTR_hdma_1:
+            dest[0] = mp_obj_malloc(sasppu_hdma_t, &sasppu_type_hdma);
+            ((sasppu_hdma_t *)MP_OBJ_TO_PTR(dest[0]))->table = 1;
+            break;
+        case MP_QSTR_hdma_2:
+            dest[0] = mp_obj_malloc(sasppu_hdma_t, &sasppu_type_hdma);
+            ((sasppu_hdma_t *)MP_OBJ_TO_PTR(dest[0]))->table = 2;
+            break;
+        case MP_QSTR_hdma_3:
+            dest[0] = mp_obj_malloc(sasppu_hdma_t, &sasppu_type_hdma);
+            ((sasppu_hdma_t *)MP_OBJ_TO_PTR(dest[0]))->table = 3;
+            break;
+        case MP_QSTR_hdma_4:
+            dest[0] = mp_obj_malloc(sasppu_hdma_t, &sasppu_type_hdma);
+            ((sasppu_hdma_t *)MP_OBJ_TO_PTR(dest[0]))->table = 4;
+            break;
+        case MP_QSTR_hdma_5:
+            dest[0] = mp_obj_malloc(sasppu_hdma_t, &sasppu_type_hdma);
+            ((sasppu_hdma_t *)MP_OBJ_TO_PTR(dest[0]))->table = 5;
+            break;
+        case MP_QSTR_hdma_6:
+            dest[0] = mp_obj_malloc(sasppu_hdma_t, &sasppu_type_hdma);
+            ((sasppu_hdma_t *)MP_OBJ_TO_PTR(dest[0]))->table = 6;
+            break;
+        case MP_QSTR_hdma_7:
+            dest[0] = mp_obj_malloc(sasppu_hdma_t, &sasppu_type_hdma);
+            ((sasppu_hdma_t *)MP_OBJ_TO_PTR(dest[0]))->table = 7;
             break;
         default:
             dest[1] = MP_OBJ_SENTINEL;
