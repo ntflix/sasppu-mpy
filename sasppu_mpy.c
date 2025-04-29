@@ -76,8 +76,33 @@ void sasppu_module_attr(mp_obj_t self_in, qstr attr, mp_obj_t *dest)
             dest[0] = mp_obj_malloc(sasppu_hdma_t, &sasppu_type_hdma);
             ((sasppu_hdma_t *)MP_OBJ_TO_PTR(dest[0]))->table = 7;
             break;
+        case MP_QSTR_hdma_enable:
+            dest[0] = MP_OBJ_NEW_SMALL_INT(SASPPU_hdma_enable);
+            break;
         default:
             dest[1] = MP_OBJ_SENTINEL;
+            break;
+        }
+    }
+    else if (dest[1] != MP_OBJ_NULL)
+    {
+        // Store attribute.
+        switch (attr)
+        {
+        case MP_QSTR_hdma_enable:
+        {
+            mp_int_t val = mp_obj_get_int(dest[1]);
+            if ((val < 0) || (val > 0xFF))
+            {
+                mp_raise_ValueError(MP_ERROR_TEXT("HDMA enable out of bounds"));
+            }
+            else
+            {
+                SASPPU_hdma_enable = val;
+                dest[0] = MP_OBJ_NULL;
+            }
+        }
+        default:
             break;
         }
     }
