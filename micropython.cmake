@@ -11,6 +11,7 @@ target_sources(usermod_sasppu INTERFACE
     ${CMAKE_CURRENT_LIST_DIR}/sasppu_sprite.c
     ${CMAKE_CURRENT_LIST_DIR}/sasppu_oam.c
     ${CMAKE_CURRENT_LIST_DIR}/sasppu_map.c
+    ${CMAKE_CURRENT_LIST_DIR}/sasppu_hdma.c
     ${CMAKE_CURRENT_LIST_DIR}/subscr_load_adapter.c
 )
 
