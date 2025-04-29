@@ -6,7 +6,6 @@
 #include "py/objarray.h"
 #include "sasppu/sasppu.h"
 #include "sasppu/help.h"
-#include "display.h"
 
 typedef struct
 {

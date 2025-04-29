@@ -7,7 +7,6 @@
 #include "py/objstr.h"
 #include "sasppu/sasppu.h"
 #include "sasppu/help.h"
-#include "display.h"
 
 #include "sasppu_background.h"
 #include "sasppu_cmath_state.h"
