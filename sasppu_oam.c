@@ -21,6 +21,7 @@ static mp_obj_t oam_subscr(mp_obj_t self_in, mp_obj_t index_in, mp_obj_t value)
         spr->height = 32;
         spr->graphics_x = 0;
         spr->graphics_y = 0;
+        spr->rotation = 0;
         spr->flags = 0;
         spr->windows = 0xFF;
         return mp_const_none;

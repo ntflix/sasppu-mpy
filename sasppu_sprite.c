@@ -12,6 +12,7 @@ mp_obj_t sasppu_sprite_default(mp_obj_t self_in)
     self->dat.height = 32;
     self->dat.graphics_x = 0;
     self->dat.graphics_y = 0;
+    self->dat.rotation = 0;
     self->dat.flags = 0;
     self->dat.windows = 0xFF;
     self->bound = -1;
@@ -80,6 +81,9 @@ static void sasppu_sprite_attr(mp_obj_t self_in, qstr attr, mp_obj_t *dest)
             break;
         case MP_QSTR_graphics_y:
             dest[0] = MP_OBJ_NEW_SMALL_INT(self->dat.graphics_y);
+            break;
+        case MP_QSTR_rotation: // an enum from 0 to 4
+            dest[0] = MP_OBJ_NEW_SMALL_INT(self->dat.rotation);
             break;
         case MP_QSTR_windows:
             dest[0] = MP_OBJ_NEW_SMALL_INT(self->dat.windows);
@@ -175,6 +179,17 @@ static void sasppu_sprite_attr(mp_obj_t self_in, qstr attr, mp_obj_t *dest)
             else
             {
                 self->dat.graphics_y = val;
+                dest[0] = MP_OBJ_NULL;
+            }
+            break;
+        case MP_QSTR_rotation:
+            if ((val < 0) || (val > 4))
+            {
+                mp_raise_ValueError(MP_ERROR_TEXT("Rotation out of bounds"));
+            }
+            else
+            {
+                self->dat.rotation = val;
                 dest[0] = MP_OBJ_NULL;
             }
             break;
