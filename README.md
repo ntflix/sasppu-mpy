@@ -74,7 +74,25 @@ The following functions are available for sprite manipulation:
 
 `blit_sprite(x, y, width, height, double_size, data)`
 
-- Blits raw sprite data to the screen.
+- Blits raw sprite data to be drawn to the screen by loading into OAM.
+
+> Example of drawing a sprite using `blit_sprite` and `oam`:
+
+````python
+with open('sprite_data.bin', 'rb') as f:
+    sprite_data = f.read()
+    sasppu.blit_sprite(x=0, y=0, width=32, height=32, sprite_data)
+
+sprite = sasppu.oam[0]
+spr.width = 32
+spr.height = 32
+spr.graphics_x = 0 # x offset of the sprite data in the loaded sprite_data
+spr.graphics_y = 0 # y offset of the sprite data in the loaded sprite_data
+spr.x = 0 # place at 0x
+spr.y = 0 # place at 0y
+spr.windows = sasppu.WINDOW_ALL
+spr.flags = spr.ENABLED
+```
 
 `blit_sprite_transparent(...)`
 
@@ -250,34 +268,23 @@ The module provides several constants for easy use:
 
 ## Usage Examples
 
-### Example 1 – Drawing a Sprite
+### Drawing a Sprite
 
 ```python
 from sasppu import Sprite, draw_text_sprite, IC_SUCCESS
 
-spr = Sprite()
-spr.x = 50
-spr.y = 60
+with open('sprite_data.bin', 'rb') as f:
+    sprite_data = f.read()
+    sasppu.blit_sprite(x=0, y=0, width=32, height=32, sprite_data)
+
+sprite = sasppu.oam[0]
 spr.width = 32
 spr.height = 32
-spr.bind(3)  # Bind sprite to OAM index 3
-
-result = draw_text_sprite(0, 0, 31, 100, "Hello World", True)
-if result == IC_SUCCESS:
-    print("Text drawn successfully!")
+spr.graphics_x = 0 # x offset of the sprite data in the loaded sprite_data
+spr.graphics_y = 0 # y offset of the sprite data in the loaded sprite_data
+spr.x = 0 # place at 0x
+spr.y = 0 # place at 0y
+spr.windows = sasppu.WINDOW_ALL
+spr.flags = spr.ENABLED
 ```
-
-### Example 2 – Drawing Text on a Background
-
-```python
-from sasppu import Background, draw_text_background
-
-bg = Background()
-bg.x = 0
-bg.y = 0
-bg.bind(1)  # Bind to BG1
-
-res = draw_text_background(0, 0, 31, 120, "Hello, SASPPU!", False)
-if res == sasppu.IC_SUCCESS:
-    print("Text drawn on BG successfully!")
-```
+````
